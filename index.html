@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFC Sounds</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 28px;
+        }
+        .button {
+            display: block;
+            width: 200px;
+            margin: 10px auto;
+            padding: 15px;
+            background: #fff;
+            color: #6e8efb;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background: #dcdcdc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Выбери и воспроизведи звук 🎵</h1>
+
+    <button class="button" onclick="playSound('sound1.mp3')">🔊 Звук 1</button>
+    <button class="button" onclick="playSound('sound2.mp3')">🔊 Звук 2</button>
+    <button class="button" onclick="playSound('sound3.mp3')">🔊 Звук 3</button>
+
+    <audio id="audioPlayer"></audio>
+
+    <script>
+        function playSound(file) {
+            let audio = document.getElementById("audioPlayer");
+            audio.src = "audio/" + file;
+            audio.play();
+        }
+
+        // Автоматическое воспроизведение звука через NFC
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sound = urlParams.get('play');
+            if (sound) {
+                playSound(sound + ".mp3");
+            }
+        }
+    </script>
+</body>
+</html>
